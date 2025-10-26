@@ -7,6 +7,11 @@ public class Count {
     private int inHalfyearCustomers = 0;
     private int inYearCustomers = 0;
 
+    public static Count create(){
+        return new Count();
+    }
+
+
     public void add(int i){
         this.allTimeCustomers += i;
         this.inDayCustomers += i;

@@ -1,16 +1,14 @@
 package project.common;
 
 public class Driver {
-    private long phonenumber;
+    private String phonenumber;
     private String email;
     private String name;
     private String surname;
-    private Transport transport;
+//    private Transport transport;
 
 
-
-
-    public Driver(String name, String surname, long phonenumber, String email){
+    public Driver(String name, String surname, String phonenumber, String email){
         setName(name);
         setSurname(surname);
         setPhonenumber(phonenumber);
@@ -20,12 +18,11 @@ public class Driver {
 
     @Override
     public String toString() {
-        String res = getName() + " " + getSurname() + ", " + getEmail() + ", " + getPhonenumber();
-        return res;
+        return getName() + " " + getSurname() + ", " + getEmail() + ", " + getPhonenumber();
     }
 
 
-    public void setPhonenumber(long phonenumber) {
+    public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 
@@ -41,9 +38,9 @@ public class Driver {
         this.surname = surname;
     }
 
-    public void setTransport(Transport transport) { this.transport = transport; }
+//    public void setTransport(Transport transport) { this.transport = transport; }
 
-    public long getPhonenumber() {
+    public String getPhonenumber() {
         return phonenumber;
     }
 

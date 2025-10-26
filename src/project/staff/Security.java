@@ -1,5 +1,8 @@
 package project.staff;
 
+
+import static project.Database.securitys;
+
 public class Security extends Staff {
 
     public Security(String name, String surname, int age, String position, int exp) {
@@ -7,21 +10,27 @@ public class Security extends Staff {
         setCategory("Secure staff");
     }
 
+    static void addToMasSec(Security st){
+        for (int i = 0; i < securitys.length; i++) {
+            if (securitys[i] == null) {
+                securitys[i] = st;
+                break;
+            }
+        }
+    }
+
     @Override
     public String doResponsibilities() {
-        String res = "From security " + this.name + " " + this.surname + ": I will watch cameras from now";
-        return res;
+        return "From security " + this.name + " " + this.surname + ": I will watch cameras from now";
     }
 
     @Override
     public String reportStatus() {
-        String res = "From security " + this.name + " " + this.surname + ": I`m going to do a control review";
-        return res;
+        return "From security " + this.name + " " + this.surname + ": I`m going to do a control review";
     }
 
     @Override
     public String inspectEquipment() {
-        String res = "From security " + this.name + " " + this.surname + ": I have to inspect computers...I hope none of them are broken";
-        return res;
+        return "From security " + this.name + " " + this.surname + ": I have to inspect computers...I hope none of them are broken";
     }
 }

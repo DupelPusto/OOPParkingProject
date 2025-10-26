@@ -1,6 +1,12 @@
 package project.common;
 
 
+import project.Database;
+import project.util.InputValidation;
+
+
+import java.util.Scanner;
+
 public class Transport {
     private String carModel;
     private String carMark;
@@ -9,11 +15,52 @@ public class Transport {
     private Driver driver;
 
 
-
     public Transport(String mark, String model, String carnumber){
         setCarMark(mark);
         setCarModel(model);
         setCarGovnumber(carnumber);
+    }
+
+    public static void addCar(){
+        Scanner s = new Scanner(System.in);
+
+        String mark;
+        String model;
+        String govnumber;
+
+        System.out.println("Car info\n");
+        System.out.print("Enter car mark: ");
+        mark = s.nextLine();
+        System.out.print("Enter car model: ");
+        model = s.nextLine();
+        System.out.print("Enter car government number: ");
+        govnumber = s.nextLine();
+        System.out.println();
+
+        Transport transport = new Transport(mark, model, govnumber);
+
+        String d_name;
+        String d_surname;
+        String d_email;
+        String d_phonenumber;
+
+        System.out.println("Driver info\n");
+        System.out.print("Enter driver`s name: ");
+        d_name = s.nextLine();
+        System.out.print("Enter driver`s surname: ");
+        d_surname = s.nextLine();
+        System.out.print("Enter driver`s email: ");
+        d_email = InputValidation.emailValidation(s);
+        System.out.print("Enter driver`s phonenumber(+380...): ");
+
+        d_phonenumber = InputValidation.phonenumberValidation(s);
+
+        Driver driver = new Driver(d_name, d_surname, d_phonenumber,d_email);
+//        driver.setTransport(transport);
+        transport.setDriver(driver);
+        Parking.addToParkPlace(transport);
+        Database.counter.add(1);
+
     }
 
     public void showTransportInfo(){
