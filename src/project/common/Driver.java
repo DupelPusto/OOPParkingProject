@@ -5,7 +5,6 @@ public class Driver {
     private String email;
     private String name;
     private String surname;
-//    private Transport transport;
 
 
     public Driver(String name, String surname, String phonenumber, String email){
@@ -38,7 +37,6 @@ public class Driver {
         this.surname = surname;
     }
 
-//    public void setTransport(Transport transport) { this.transport = transport; }
 
     public String getPhonenumber() {
         return phonenumber;
