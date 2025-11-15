@@ -4,13 +4,12 @@ package project.utilities;
 import project.Admin;
 import project.util.InputValidation;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static project.Database.energy;
 import static project.Database.water;
 
-public class PublicUtilities {
+public abstract class PublicUtilities {
     String utilType;
     double utilPrice;
     double consumed;
@@ -19,15 +18,13 @@ public class PublicUtilities {
     public PublicUtilities() {
     }
 
-    protected String computePayment(double price, double consumed, String unit){
-        double res = price * consumed;
-        return String.format("Payment size is %.3f UAH for %.3f %s", res, consumed, unit);
-    }
 
-    protected String limitRemainingCompute(double limit, double consumed, String unit){
-        double res = limit - consumed;
-        return String.format("%.3f %s is remaining for present period", res, unit);
-    }
+
+    protected abstract String computePayment();
+
+    protected abstract String limitRemainingCompute();
+
+    protected abstract String generateConsumptionReport();
 
 
     public static void puMenu(){
@@ -50,12 +47,14 @@ public class PublicUtilities {
                     energy.setConsumed(InputValidation.doubleValidation(s));
                     System.out.println(energy.limitRemainingCompute());
                     System.out.println(energy.computePayment());
+                    System.out.println(energy.generateConsumptionReport());
                     break;
                 case 2:
                     System.out.print("Enter consumed water: ");
                     water.setConsumed(InputValidation.doubleValidation(s));
                     System.out.println(water.limitRemainingCompute());
                     System.out.println(water.computePayment());
+                    System.out.println(water.generateConsumptionReport());
                     break;
                 case 3:
                     Admin.admin();
@@ -73,9 +72,6 @@ public class PublicUtilities {
     public void setConsumed(double consumed) { this.consumed = consumed; }
 
     public void setConsumeLimit(double consumeLimit) { this.consumeLimit = consumeLimit; }
-
-
-    public double getConsumed() { return consumed; }
 
     public double getUtilPrice() { return utilPrice; }
 }

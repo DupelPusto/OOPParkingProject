@@ -1,7 +1,6 @@
 package project.staff;
 
 
-import static project.Database.securitys;
 
 public class Security extends Staff {
 
@@ -10,14 +9,6 @@ public class Security extends Staff {
         setCategory("Secure staff");
     }
 
-    static void addToMasSec(Security st){
-        for (int i = 0; i < securitys.length; i++) {
-            if (securitys[i] == null) {
-                securitys[i] = st;
-                break;
-            }
-        }
-    }
 
     @Override
     public String doResponsibilities() {

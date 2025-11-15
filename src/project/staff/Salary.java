@@ -32,14 +32,17 @@ public class Salary {
     }
 
 
-    public static String computeSalary(Security s){
-        double salary = (computeSupplement(s.getWorkExperience()) * securitySalaryRate) + securitySalaryRate;
+    public static String computeSalary(Staff s){
+        double salary = 0;
+        if(s.getCategory().equals("Secure staff")){
+            salary = (computeSupplement(s.getWorkExperience()) * securitySalaryRate) + securitySalaryRate;
+        }
+
+        if (s.getCategory().equals("Cleaning staff")){
+            salary = (computeSupplement(s.getWorkExperience()) * cleanerSalaryRate) + cleanerSalaryRate;
+        }
         return String.format("For %s %s %s month salary is %.3f UAH", s.getWorkPosition(), s.getName(), s.getSurname(), salary);
     }
 
-    public static String computeSalary(Cleaner c){
-        double salary = (computeSupplement(c.getWorkExperience()) * cleanerSalaryRate) + cleanerSalaryRate;
-        return String.format("For %s %s %s month salary is %.3f UAH", c.getWorkPosition(), c.getName(), c.getSurname(), salary);
-    }
 
 }

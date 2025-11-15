@@ -1,22 +1,12 @@
 package project.staff;
 
-import static project.Database.cleaners;
-
 public class Cleaner extends Staff {
 
     public Cleaner(String name, String surname, int age, String position, int exp) {
         super(name, surname, age, position, exp);
-        setCategory("Secure staff");
+        setCategory("Cleaning staff");
     }
 
-    static void addToMasClean(Cleaner cl){
-        for (int i = 0; i < cleaners.length; i++) {
-            if (cleaners[i] == null) {
-                cleaners[i] = cl;
-                break;
-            }
-        }
-    }
 
     @Override
     public String doResponsibilities() {

@@ -6,11 +6,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static project.Database.SIZE;
-import static project.Database.cleaners;
-import static project.Database.securitys;
+import static project.Database.staff;
 import static project.Admin.admin;
 
-public class Staff {
+public abstract class Staff {
     protected String name;
     protected String surname;
     protected int age;
@@ -76,14 +75,13 @@ public class Staff {
             }
         }
 
+
         if(kind.equals("security")){
-            Security sec = new Security(name,surname,age,pos,exp);
-            Security.addToMasSec(sec);
+            Staff.addToMas(new Security(name,surname,age,pos,exp));
         }
 
         if (kind.equals("cleaner")){
-            Cleaner cl = new Cleaner(name,surname,age,pos,exp);
-            Cleaner.addToMasClean(cl);
+            Staff.addToMas(new Cleaner(name,surname,age,pos,exp));
         }
 
     }
@@ -106,49 +104,30 @@ public class Staff {
             switch (check) {
                 case 1:
                     for (int i = 0; i < SIZE; i++) {
-                        if(securitys[i] != null){
-                            System.out.println(Salary.computeSalary(securitys[i]));
-                        }
-                        if (cleaners[i] != null){
-                            System.out.println(Salary.computeSalary(cleaners[i]));
+                        if(staff[i] != null){
+                            System.out.println(Salary.computeSalary(staff[i]));
                         }
                     }
                     break;
                 case 2:
                     for (int i = 0; i < SIZE; i++) {
-                        if (cleaners[i] != null) {
-                            System.out.println(cleaners[i].reportStatus());
-                        }
-                    }
-
-                    for (int i = 0; i < SIZE; i++){
-                        if (securitys[i] != null) {
-                            System.out.println(securitys[i].reportStatus());
+                        if (staff[i] != null) {
+                            System.out.println(staff[i].reportStatus());
                         }
                     }
                     break;
                 case 3:
                     for (int i = 0; i < SIZE; i++) {
-                        if (cleaners[i] != null) {
-                            System.out.println(cleaners[i].doResponsibilities());
-                        }
-                    }
-                    for (int i = 0; i < SIZE; i++) {
-                        if (securitys[i] != null) {
-                            System.out.println(securitys[i].doResponsibilities());
+                        if (staff[i] != null) {
+                            System.out.println(staff[i].doResponsibilities());
                         }
                     }
                     break;
 
                 case 4:
                     for (int i = 0; i < SIZE; i++) {
-                        if (cleaners[i] != null) {
-                            System.out.println(cleaners[i].inspectEquipment());
-                        }
-                    }
-                    for (int i = 0; i < SIZE; i++){
-                        if (securitys[i] != null) {
-                            System.out.println(securitys[i].inspectEquipment());
+                        if (staff[i] != null) {
+                            System.out.println(staff[i].inspectEquipment());
                         }
                     }
                     break;
@@ -159,18 +138,20 @@ public class Staff {
         }
     }
 
-    public String doResponsibilities(){
-        return "from Staff";
-    }
+    public abstract String doResponsibilities();
 
-    public String reportStatus(){
-        return "from Staff";
-    }
+    public abstract String reportStatus();
 
-    public String inspectEquipment(){
-        return "from Staff";
-    }
+    public abstract String inspectEquipment();
 
+    public static void addToMas(Staff s){
+        for (int i = 0; i < staff.length; i++) {
+            if (staff[i] == null) {
+                staff[i] = s;
+                break;
+            }
+        }
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -199,4 +180,6 @@ public class Staff {
     public String getSurname() { return surname; }
 
     public String getWorkPosition() { return workPosition; }
+
+    public String getCategory() { return category; }
 }

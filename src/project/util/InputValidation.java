@@ -17,6 +17,7 @@ public class InputValidation {
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Incorrect number format, try again: ");
+                s.nextLine();
             }
         }
         return res;
@@ -31,6 +32,7 @@ public class InputValidation {
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Incorrect number format, try again: ");
+                s.nextLine();
             }
         }
         return res;
